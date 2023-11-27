@@ -5,3 +5,6 @@ Kelompok 7
 - Achmad Khosyi' Assajjad Ramandanta / 5025211007
 - Jawahirul Wildan / 5025211150
 
+![](/bioskopin/uploads/register.png)
+
+![](/bioskopin/uploads/login.png)
