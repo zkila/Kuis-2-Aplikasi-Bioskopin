@@ -8,3 +8,21 @@ Kelompok 7
 ![](/bioskopin/uploads/register.png)
 
 ![](/bioskopin/uploads/login.png)
+
+![](/bioskopin/uploads/dashboard.png)
+
+![](/bioskopin/uploads/detail.png)
+
+![](/bioskopin/uploads/genre.png)
+
+![](/bioskopin/uploads/keranjang.png)
+
+![](/bioskopin/uploads/pesan.png)
+
+![](/bioskopin/uploads/data.png)
+
+![](/bioskopin/uploads/edit.png)
+
+![](/bioskopin/uploads/invoice.png)
+
+![](/bioskopin/uploads/pemesanan.png)
