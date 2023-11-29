@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2023 at 02:30 PM
+-- Generation Time: Nov 29, 2023 at 11:14 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,12 +42,12 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`id_brg`, `nama_brg`, `keterangan`, `kategori`, `harga`, `stok`, `gambar`) VALUES
-(1, 'Sepatu Ventela Province', 'Sepatu Merk Ventela Province dengan warna Maroon', 'Pakaian Pria', 360000, 9, 'sepatu.jpg'),
-(4, 'Laptop Asus X441UV', 'RAM 8 GB Dual-channel, 512GB HDD SATA, TN HD+ Display, I3 6006U, Geforce 920MX', 'Elektronik', 4500000, 10, 'laptop.jpg'),
-(7, 'Ajazz AK820', 'Mechanical 75% Keyboard, Gasket Mount, Knob, Ajazz AS Red Switch', 'Elektronik', 320000, 200, 'ajazzak820.jpg'),
-(8, 'KOORUI 24E3 FHD IPS', 'KOORUI 24E3 24 inch FHD GAMING MONITOR 165Hz 1ms IPS PANEL', 'Elektronik', 1480000, 87, 'koorui24e31.jpg'),
-(9, 'Vortex Series Inno X2', 'X-2 Superlight Wireless Gaming Mouse - Hitam/Putih, Pixart PAW3395', 'Elektronik', 559000, 38, 'innox2.jpg'),
-(10, 'Samsung SSD 970 EVO Plus', 'SSD M.2 NVMe PCIe - 500GB - Garansi 5 Tahun', 'Elektronik', 738000, 25, 'samsung970.jpg');
+(1, 'Barbie', 'Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. ', 'Comedy', 35000, 114, 'barbie.png'),
+(4, 'Oppenheimer', 'During World War II, Lt. Gen. Leslie Groves Jr. appoints physicist J. Robert Oppenheimer to work on the top-secret Manhattan Project.', 'Thriller', 50000, 180, 'oppenheimer.png'),
+(7, 'Mission Impossible Dead Reckoning Part One', 'Ethan Hunt and the IMF team must track down a terrifying new weapon that threatens all of humanity if it falls into the wrong hands.', 'Thriller', 50000, 200, 'mission impossible.png'),
+(8, 'Blue Beetle', 'Jaime Reyes suddenly finds himself in possession of an ancient relic of alien biotechnology called the Scarab.', 'Action', 50000, 127, 'blue beetle.png'),
+(9, 'The Hunger Games: Mockingjay – Part 2', 'After realising that she is no longer fighting for survival, Katniss Everdeen sets out to assassinate the tyrannical President Snow and liberate the people of Panem.', 'Action', 50000, 137, 'hunger games.png'),
+(10, 'Spider-Man: Across the Spider-Verse', 'In an attempt to curb the Spot, a scientist, from harnessing the power of the multiverse, Miles Morales joins forces with Gwen Stacy.', 'Action', 50000, 140, 'spiderman atsv.png');
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,10 @@ CREATE TABLE `tb_invoice` (
 --
 
 INSERT INTO `tb_invoice` (`id`, `nama`, `alamat`, `tgl_pesan`, `batas_bayar`) VALUES
-(1, 'Duevano Fairuz Pandya', 'Gunungsari Indah', '2023-11-23 19:45:13', '2023-11-24 19:45:13');
+(7, 'Grand City XXI', 'BCA', '2023-11-27 23:16:25', '2023-11-28 23:16:25'),
+(8, 'TV Hartono MER', 'QRIS', '2023-11-27 23:16:41', '2023-11-28 23:16:41'),
+(9, 'Pakuwon City Mall XXI', 'MANDIRI', '2023-11-27 23:45:26', '2023-11-28 23:45:26'),
+(10, 'Grand City XXI', 'BCA', '2023-11-28 00:12:23', '2023-11-29 00:12:23');
 
 -- --------------------------------------------------------
 
@@ -91,18 +94,20 @@ CREATE TABLE `tb_pesanan` (
 --
 
 INSERT INTO `tb_pesanan` (`id`, `id_invoice`, `id_brg`, `nama_brg`, `jumlah`, `harga`, `pilihan`) VALUES
-(1, 1, 1, 'Sepatu', 1, 300000, '');
-
---
--- Triggers `tb_pesanan`
---
-DELIMITER $$
-CREATE TRIGGER `pesanan_penjualan` AFTER INSERT ON `tb_pesanan` FOR EACH ROW BEGIN
-	UPDATE tb_barang SET stok = stok-NEW.jumlah
-    WHERE id_brg = NEW.id_brg;
-END
-$$
-DELIMITER ;
+(1, 1, 1, 'Sepatu', 1, 300000, ''),
+(2, 2, 1, 'Barbie', 1, 50000, ''),
+(3, 3, 1, 'Barbie', 2, 50000, ''),
+(4, 4, 4, 'Oppenheimer', 2, 50000, ''),
+(5, 5, 4, 'Oppenheimer', 1, 50000, ''),
+(6, 6, 7, 'Mission Impossible Dead Reckoning Part One', 1, 50000, ''),
+(7, 7, 10, 'Spider-Man: Across the Spider-Verse', 1, 50000, ''),
+(8, 7, 4, 'Oppenheimer', 1, 50000, ''),
+(9, 7, 1, 'Barbie', 1, 50000, ''),
+(10, 8, 8, 'Blue Beetle', 2, 50000, ''),
+(11, 9, 1, 'Barbie', 1, 50000, ''),
+(12, 9, 4, 'Oppenheimer', 1, 50000, ''),
+(13, 10, 10, 'Spider-Man: Across the Spider-Verse', 2, 50000, ''),
+(14, 10, 8, 'Blue Beetle', 1, 50000, '');
 
 -- --------------------------------------------------------
 
@@ -124,7 +129,9 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO `tb_user` (`id`, `nama`, `username`, `password`, `role_id`) VALUES
 (1, 'admin', 'admin', '123', 1),
-(2, 'user', 'user', '123', 2);
+(2, 'user', 'user', '123', 2),
+(3, 'Arkana Bilal ', 'rkila', '321', 2),
+(4, 'testes', 'testes', '456', 2);
 
 --
 -- Indexes for dumped tables
@@ -168,19 +175,19 @@ ALTER TABLE `tb_barang`
 -- AUTO_INCREMENT for table `tb_invoice`
 --
 ALTER TABLE `tb_invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
